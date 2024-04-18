@@ -1,26 +1,4 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-.flex-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    flex-wrap: wrap;
-}
-
-#response-container, #chart-container {
-    flex: 1;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-table {
+/* table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
@@ -34,43 +12,41 @@ th, td {
 
 th {
     background-color: #f2f2f2;
+} */
+
+
+
+.rounded-table {
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-h1 {
-    text-align: center;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 20px;
+/* #top-bg {
+    background-image: url('\webbg.jpg');
+    background-size: cover;
+  }
+
+#bottom-bg {
+    background-image: url('\webbg.jpg');
+} */
+
+
+body {
+    background-image: url('\webbg.jpg');
+    background-size: cover;
 }
 
-/* CSS for the form */
-#search-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    width: fit-content;
+#title {
+    font-family: 'Playfair Display', serif;
+}
+#title-2 {
+    font-family: 'Montserrat', sans-serif; 
 }
 
-.form-group {
-    margin-bottom: 15px;
+#top-bg {
+    background-image: url('\house2.jpg');
+    background-size: 30%;
 }
-
-#search-form select,
-#search-form button {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#search-form button {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
-}
-
-#search-form button:hover {
-    background-color: #0056b3;
+.no-bg {
+    background-color: transparent !important; /* Override any Bootstrap background color */
 }
