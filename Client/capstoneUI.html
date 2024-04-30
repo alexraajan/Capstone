@@ -13,7 +13,10 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 
 <body class="body bg-light">
@@ -23,18 +26,19 @@
 
         </div>
     </nav>
-    </br>
-    <div >
 
-        <div class="container border border-secondary rounded-5 p-3 m-10" id="top-bg">
+    <div>
+
+        <div class="container border border-secondary rounded-top rounded-5 p-3 m-10" id="top-bg">
 
             <div class="no-bg text-light">
                 </br>
                 <div>
                     <h1 id="title">Welcome! How are you today?</h1>
 
-                    <h6 id="title-2">Did you know? Choosing a good place to live will impact positively in daily life.</h6>
-                </br>
+                    <h6 id="title-2">Did you know? Choosing a good place to live will impact positively in daily life.
+                    </h6>
+                    </br>
                 </div>
             </div>
             </br></br>
@@ -85,10 +89,10 @@
                 </div>
 
                 </br>
-                <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target=".row-1, .row-2, .row-3" aria-expanded="false"
-                    aria-controls="row-1 row-2 row-3" type="submit">Submit</button>
+                <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target=".row-1, .row-2, .row-3"
+                    aria-expanded="false" aria-controls="row-1 row-2 row-3" type="submit">Submit</button>
             </form>
-        </br>
+            </br>
         </div>
         </br>
     </div>
@@ -98,63 +102,75 @@
             <div class="row gx-3 gy-3 collapse row-1" id="row-1">
                 <div class="col-4">
                     <div>
-                    <h3 class="bg-dark text-light border-dark rounded-5 p-3 m-2">Result 1</h3>
+                        <h3 class="bg-dark text-light border-dark rounded-5 p-3 m-2">Result 1</h3>
                     </div>
                     <div class="text-dark m-3 bg-light bg-opacity-75 border-dark rounded-5 p-3 m-2">
-                    </br></br></br></br></br></br></br>
+                        </br></br></br></br></br></br></br>
                     </div>
                 </div>
 
                 <div class="col-4">
                     <div>
-                    <h3 class="bg-dark text-light border-dark rounded-5 p-3 m-2">Result 2</h3>
+                        <h3 class="bg-dark text-light border-dark rounded-5 p-3 m-2">Result 2</h3>
                     </div>
                     <div class="text-dark m-3 bg-light bg-opacity-75 border-dark rounded-5 p-3 m-2">
-                    </br></br></br></br></br></br></br>
+                        </br></br></br></br></br></br></br>
                     </div>
                 </div>
+                <div class="col-4" id="chart-container">
+                    <div>
+                        <h3 class="text-light m-3 bg-dark border-dark rounded-5 p-3 m-2">Crime Data</h3>
+                    </div>
+                    <canvas class="text-dark m-3 bg-light border-dark rounded-5 p-3 m-2" id="myChart"></canvas>
+                    </br></br>
+                </div>
+            </div>
 
-                <div class="col-4">
+
+
+
+
+            <div class="row gx-3 gy-3 collapse row-2" id="row-2">
+                <div class="col-6">
                     <div>
                         <h3 class="bg-dark text-light border-dark rounded-5 p-3 m-2">Map</h3>
                     </div>
-                    <div class="text-dark m-3 bg-light bg-opacity-75 border-dark rounded-5 p-3 m-2">
-                    </br></br></br></br></br></br></br>
+                    <div id="city-form">
+                        <select id="city-select" onchange="filterSchoolsByCity()">
+                            <option value="">Select a City</option>
+                        </select>
                     </div>
+                    <div id="content"></div>
+                    <div class="text-dark m-3 bg-light bg-opacity-75 border-dark rounded-5 p-3 m-2" id="map">
 
-                </div>
 
-            </div>
-            <div class="row gx-3 gy-3 collapse row-2" id="row-2">
-                <div class="col-4" id="chart-container">
-                    <h3 class="text-light m-3 bg-dark border-dark rounded-5 p-3 m-2">Crime Data</h3>
-                    <canvas class="text-dark m-3 bg-light border-dark rounded-5 p-3 m-2"
-                        id="myChart"></canvas>
-                    </br></br></br></br></br>
+                    </div>
                 </div>
-                <div class="col-8">
+                <div class="col-6">
                     <h3 class="text-light m-3 bg-dark border-dark rounded-5 p-3 m-2">Schools</h3>
                     <div class="text-dark m-3 bg-transparent bg-opacity-75 border-dark rounded-5 p-3 m-2"
-                        id="json-response"></div>
+                            id="json-response"></div>
 
                 </div>
-                </br></br></br></br></br>
-            </div>
+            </div>    
+
+
             <div class="row gx-3 gy-3 collapse row-3" id="row-3">
-                <div class="col-2"></div>
-                <div class="col-8">
-                    <h3 class="bg-dark text-light border-dark rounded-5 p-3 m-2">Related Links</h3>
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <h3 class="bg-dark text-light border-dark rounded-5 p-3 m-2">Related Links</h3>
 
 
-                    <div class="text-dark m-3 bg-light bg-opacity-75 border-dark rounded-5 p-3 m-2">
-                        </br></br></br></br></br>
+                        <div class="text-dark m-3 bg-light bg-opacity-75 border-dark rounded-5 p-3 m-2">
+                            </br></br></br></br></br>
+                        </div>
                     </div>
-                </div>
-                <div class="col-2"></div>
+                    <div class="col-2"></div>
             </div>
         </div>
     </div>
-    <script src="sample.js"></script>
+<script src="script.js"></script>
+
 </body>
 
 </html>

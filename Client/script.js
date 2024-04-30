@@ -24,8 +24,7 @@ function displayResponse(data) {
         Level_of_schooling: school.Level_of_schooling,
         Street: school.Street,
         Postcode: school.Postcode,
-        Phone: school.Phone,
-        Website: school.Website
+        Phone: school.Phone
     }));
 
     const table = document.createElement('table');
@@ -89,8 +88,6 @@ async function fetchData(keyword) {
 
 
 
-
-
 function displayResponse(data) {
     const schools = data.map(school => ({
         School_name: school.School_name,
@@ -98,7 +95,6 @@ function displayResponse(data) {
         Street: school.Street,
         Postcode: school.Postcode,
         Phone: school.Phone,
-        Website: school.Website
     }));
 
     const table = document.createElement('table');
@@ -214,3 +210,71 @@ function drawLineChart(data, full_data) {
         }
     });
 }
+
+
+const cityToPostcodes = {
+    Wollongong: [2500, 2515, 2519, 2516, 2518, 2506],
+    Kiama: [2533, 2535, 2534, 2577, 2527],
+    Shellharbour: [2528, 2529, 2527],
+    Sutherland: [
+      2234, 2226, 2230, 2229, 2233, 2232, 2227, 2224, 2231, 2225, 2228, 2172,
+      2288,
+    ],
+    Campbelltown: [2558, 2560, 2559, 2565, 2566, 2167, 2564, 2179],
+  };
+  
+  let schoolsData = [];
+  let map;
+  
+  function populateCityOptions() {
+    const citySelect = document.getElementById("city-select");
+    Object.keys(cityToPostcodes).forEach((city) => {
+      const option = document.createElement("option");
+      option.value = city;
+      option.textContent = city;
+      citySelect.appendChild(option);
+    });
+  }
+  
+  function plotSchoolsOnMap(schools) {
+    if (map) map.remove(); // Clear existing map instance if exists
+    map = L.map("map").setView([-34.9279, 138.6007], 13); // Default view
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+  
+    schools.forEach((school) => {
+      if (school.Latitude && school.Longitude) {
+        let popupContent = `<b>${school.School_name}</b><br>ICSEA Value: ${school.ICSEA_value}<br><a href="${school.Website}" target="_blank">Visit Website</a>`;
+        L.marker([school.Latitude, school.Longitude], {
+          title: school.School_name,
+        })
+          .addTo(map)
+          .bindPopup(popupContent);
+      }
+    });
+  
+    if (schools.length > 0) {
+      map.fitBounds(schools.map((school) => [school.Latitude, school.Longitude]));
+    }
+  }
+  
+  fetch("school_data.json")
+    .then((response) => response.json())
+    .then((data) => {
+      schoolsData = data;
+      populateCityOptions();
+      filterSchoolsByCity(); // Initialize map with all schools
+    })
+    .catch((error) => console.error("Error loading the JSON data:", error));
+  
+  function filterSchoolsByCity() {
+    const selectedCity = document.getElementById("city-select").value;
+    const filteredSchools = selectedCity
+      ? schoolsData.filter((school) =>
+          cityToPostcodes[selectedCity].includes(parseInt(school.Postcode))
+        )
+      : schoolsData;
+    plotSchoolsOnMap(filteredSchools);
+  }
