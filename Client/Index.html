@@ -2,270 +2,197 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Estate Insight</title>
+    <meta charset="utf-8">
+    <title>RealEstate Insighter</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
+    <!-- Favicon -->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+	
+	<link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet">
 </head>
 
-<body class="body bg-light">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <div class="container">
-            <a href="#" class="navbar-brand">Real Estate Insight</a>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="index2.html" class="nav-link">Resources</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-
-
-    <div class="container" id="top-bg">
-
-
-
-
-        <div class="row gx-4 gy-2 collapse show main-collapse" id="main-collapse">
-            <div class="col-2"></div>
-            <div class="col-8">
-                </br></br></br>
-
-                <div class="row gx-4 gy-2 bg-dark rounded-2">
-                    <div class="col-1"></div>
-                    <div class="col-3">
-                        <img class="card-img-center" src="ml.jpg" style="height: 140px;" />
-                    </div>
-                    <div class="col-1"></div>
-                    <div class="col-6 card-text p-3 m-2" style="width: 300px; font-size: 15px;">
-                        Enable potential homebuyers and investors to perform risk assessments
-                        based on the projections and trend analysis to make well-informed
-                        strategic decisions
-                    </div>
-                </div>
-
-                <div class="col-2"></div>
-                </br></br>
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
+        </div>
+        <!-- Spinner End -->
 
 
-            <div class="row">
-                <div class="col-2"></div>
-                <form class="col-8" id="search-form">
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary">Insighter</h3>
+                </a>
+               
+                <div class="navbar-nav w-100">
+                    <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="blank.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Data Resources</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
 
-                    <div class="form-floating">
-                        <div class="row">
 
-                            <div class="col-4">
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <form class="d-none d-md-flex ms-4" id="search-form">
+				
+					<select id="district-dropdown" name="district" class="form-control bg-dark border-0" placeholder="Location">
+                                <option value="" selected disabled>Choose Location</option>
+                                <!-- Dropdown options will be dynamically loaded here -->
+                    </select>
+					<select id="bedrooms-dropdown" name="bedrooms" class="form-control bg-dark border-0"
+                                placeholder="Number of Bedrooms">
+                                <option value=""  disabled>No of Bedroom</option>
+                                <option value="1" selected>1 Bedroom</option>
+                                <option value="2">2 Bedrooms</option>
+                                <option value="3">3 Bedrooms</option>
+                                <option value="4">4 Bedrooms</option>
+                    </select>
+				
+					
+					<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                </form>
+             
+            </nav>
+            <!-- Navbar End -->
 
-                                <select id="district-dropdown" name="district" class="form-control"
-                                    placeholder="Location">
-                                    <option value="" selected disabled>Choose Location</option>
 
-                                </select>
+
+
+
+            <!-- Sales Chart Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-secondary text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Price Prediction</h6>
+                               
                             </div>
-                            <div class="col-4">
-                                <select id="bedrooms-dropdown" name="bedrooms" class="form-control"
-                                    placeholder="Number of Bedrooms">
-                                    <option value="" selected disabled>Number of Bedrooms</option>
-                                    <option value="1">1 Bedroom</option>
-                                    <option value="2">2 Bedrooms</option>
-                                    <option value="3">3 Bedrooms</option>
-                                    <option value="4">4 Bedrooms</option>
-                                    <option value="5">5 Bedrooms</option>
-                                    <option value="6">6 Bedrooms</option>
-                                    <option value="7">7 Bedrooms</option>
-                                </select>
-                            </div>
-                            <div class="col-4">
-                                <select id="bathrooms" name="bathrooms" class="form-control"
-                                    placeholder="Number of Bathrooms">
-                                    <option value="" selected disabled>Number of Bathrooms</option>
-                                    <option value="1">1 Bathroom</option>
-                                    <option value="2">2 Bathrooms</option>
-                                    <option value="3">3 Bathrooms</option>
-                                    <option value="4">4 Bathrooms</option>
-                                    <option value="5">5 Bathrooms</option>
-                                </select>
-                            </div>
-                            <!-- <div class="col-3">
-                                    <select id="driveway" name="driveway" class="form-control" placeholder="driveway">
-                                        <option value="" selected disabled>Driveway</option>
-                                        <option value="1">Yes</option>
-                                        <option value="2">No</option>
-                                    </select>
-                                </div> -->
+                            <canvas id="worldwide-sales"></canvas>
                         </div>
                     </div>
-
-                    </br>
-                    <button class="btn btn-primary" data-bs-toggle="collapse"
-                        data-bs-target=".uncollapse, .main-collapse, .main-collapse-2, .row-1, .row-2, .row-3" aria-expanded="false"
-                        aria-controls="uncollapse main-collapse main-collapse-2 row-1 row-2 row-3" type="submit">Submit</button>
-                </form>
-                <div class="col-2"></div>
+                    <div class="col-sm-12 col-xl-6">
+					<div class="bg-secondary text-center rounded p-4">
+					
+					<div  id="pricejson-response">
+					</div>
+					</div>
+					
+                        
+                    </div>
+                </div>
             </div>
-            </br>
-        </div>
-        </br></br>
-        <div class="row gx-4 gy-2 collapse main-collapse-2" id="main-collapse-2">
+			 <!-- school Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div id="json-response"></div>
+                </div>
+            </div>
+			
+			<!-- map Start -->
+			<div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div id="map" style="height: 400px"></div>
+                </div>
+            </div>
+            <!-- Sales Chart End -->
+
+			<div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Crime Comparison</h6>
+                                
+                            </div>
+                            <canvas id="salse-revenue"></canvas>
+                        </div>
+            </div>
+			<!-- crime table -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div id="crimejson-response"></div>
+                </div>
+            </div>
+
+           
+            <!-- Recent Sales End -->
+
+
             
-            <div class="col-5">
-                </br></br></br>
-
-                <div class="row gx-4 gy-2 bg-dark rounded-2">
-                    <div class="col-1"></div>
-                    <div class="col-3">
-                        <img class="card-img-center" src="ml.jpg" style="height: 140px;" />
-                    </div>
-                    <div class="col-1"></div>
-                    <div class="col-6 card-text p-3 m-2" style="width: 300px; font-size: 15px;">
-                        Enable potential homebuyers and investors to perform risk assessments
-                        based on the projections and trend analysis to make well-informed
-                        strategic decisions
-                    </div>
-                </div>
 
 
+            <!-- Footer Start -->
+				<div class="container-fluid pt-4 px-4">
+					<div class="bg-secondary rounded-top p-4">
+						<div class="row">
+							<div class="col-12 col-sm-6 text-center text-sm-start">
+								&copy; <a href="#">RealEstate Insighter</a>, All Right Reserved. 
+							</div>
+							<div class="col-12 col-sm-6 text-center text-sm-end">
+								<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer End -->
+			</div>
+        <!-- Content End -->
 
 
-
-                </br></br></br>
-                <form id="search-form">
-
-                    <div class="form-floating">
-                        <div class="row">
-
-                            <div class="col-4">
-
-                                <select id="district-dropdown" name="district" class="form-control"
-                                    placeholder="Location">
-                                    <option value="" selected disabled>Choose Location</option>
-
-                                </select>
-                            </div>
-                            <div class="col-4">
-                                <select id="bedrooms-dropdown" name="bedrooms" class="form-control"
-                                    placeholder="Number of Bedrooms">
-                                    <option value="" selected disabled>Number of Bedrooms</option>
-                                    <option value="1">1 Bedroom</option>
-                                    <option value="2">2 Bedrooms</option>
-                                    <option value="3">3 Bedrooms</option>
-                                    <option value="4">4 Bedrooms</option>
-                                    <option value="5">5 Bedrooms</option>
-                                    <option value="6">6 Bedrooms</option>
-                                    <option value="7">7 Bedrooms</option>
-                                </select>
-                            </div>
-                            <div class="col-4">
-                                <select id="bathrooms" name="bathrooms" class="form-control"
-                                    placeholder="Number of Bathrooms">
-                                    <option value="" selected disabled>Number of Bathrooms</option>
-                                    <option value="1">1 Bathroom</option>
-                                    <option value="2">2 Bathrooms</option>
-                                    <option value="3">3 Bathrooms</option>
-                                    <option value="4">4 Bathrooms</option>
-                                    <option value="5">5 Bathrooms</option>
-                                </select>
-                            </div>
-                            <!-- <div class="col-3">
-                                        <select id="driveway" name="driveway" class="form-control" placeholder="driveway">
-                                            <option value="" selected disabled>Driveway</option>
-                                            <option value="1">Yes</option>
-                                            <option value="2">No</option>
-                                        </select>
-                                    </div> -->
-                        </div>
-                    </div>
-
-                    </br>
-                    <button class="btn btn-primary" data-bs-toggle="collapse"
-                        data-bs-target=".uncollapse, .row-1, .row-2, .row-3" aria-expanded="false"
-                        aria-controls="uncollapse row-1 row-2 row-3" type="submit">Submit</button>
-                </form>
-                </br>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-6 collapse uncollapse" id="uncollapse">
-                <div class="container">
-                    <h3 class="bg-dark text-light border-secondary rounded-5 p-3 m-2">Prediction Data</h3>
-                    </br>
-                    <div id="chart-bg-11">
-                        <canvas id="predictionChart" class="bg-light border-secondary rounded-5 p-3 m-2"></canvas>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        </br>
-
-
-
-
-
-
-        </br>
-
-        <div class="row gx-3 gy-3 collapse row-2" id="row-2">
-            <div class="col-5">
-                <div>
-                    <h3 class="bg-dark text-light border-dark rounded-5 p-3 m-2">Map</h3>
-                </div>
-
-                <div id="content"></div>
-                <div class="text-dark m-3 bg-light bg-opacity-75 border-dark rounded-5 p-3 m-2" id="map">
-
-
-                </div>
-            </div>
-            <div class="col-7">
-                <h3 class="text-light m-3 bg-dark border-dark rounded-5 p-3 m-2">Schools</h3>
-                <div class="text-dark m-3 bg-transparent bg-opacity-75 border-dark rounded-5 p-3 m-2"
-                    id="json-response">
-                </div>
-            </div>
-            <!-- <div class="col-3">
-                    <div class="container">
-                        <h3 class="text-light m-3 bg-dark border-secondary rounded-5 p-3 m-2">Suburb Crime Data</h3>
-                        <canvas id="crimeDataChart" class="text-dark m-3 bg-light border-dark rounded-5 p-3 m-2"></canvas>
-                    </div>
-                </div> -->
-        </div>
-
-
-        <div class="row gx-3 gy-3 collapse row-3" id="row-3">
-
-            <div class="col">
-                <div class="container">
-                    <h3 class="text-light m-3 bg-dark border-secondary rounded-5 p-3 m-2">Suburb Crime Data</h3>
-                    <canvas id="crimeDataChart" class="text-dark m-3 bg-light border-dark rounded-5 p-3 m-2"></canvas>
-                </div>
-            </div>
-        </div>
-
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-
-    </div>
-    </div>
-    <script src="script.js"></script>
-
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </body>
 
 </html>

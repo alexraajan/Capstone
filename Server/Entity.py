@@ -1,11 +1,20 @@
 class School:
-    def __init__(self, name, level, street, postcode, phone, email):
+
+    def __init__(self, name, level, street, postcode, website, email, icsea, latitude, longitude, subType, LBOTE, indigenous, enrollment):
         self.name = name
         self.level = level
         self.street = street
         self.postcode = postcode
-        self.phone = phone
+        self.website = website
         self.email = email
+        self.icsea = icsea
+        self.latitude = latitude
+        self.longitude = longitude
+        self.subType = subType
+        self.LBOTE = LBOTE
+        self.indigenous = indigenous
+        self.enrollment = enrollment
+
 
 class Crime:
     def __init__(self, crime_Subcategory, total_count):

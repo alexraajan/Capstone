@@ -26,7 +26,7 @@ def get_Crime_filtered_data():
     else:
         jsonify({"error": "Failed to filter data"})
 
-@app.route('/api/TotalCrimeData', methods=['POST'])
+@app.route('/api/TotalCrimeData', methods=['GET'])
 def get_AllCrime_filtered_data():
     filtered_df = Business_Layer.getTotalCrime()
     if filtered_df is not None:
@@ -46,12 +46,23 @@ def get_Suburb_filtered_data():
 
 @app.route('/api/Prediction', methods=['POST'])
 def get_prediction_data():
+    print("inside")
     suburb = request.form['suburb']
     bedroomCount = request.form['bedroomCount']
     filtered_df = Business_Layer.getPrediction(suburb, bedroomCount)
     if filtered_df is not None:
         prediction_dict_list = [prediction.__dict__ for prediction in filtered_df]
         return jsonify(prediction_dict_list)
+    else:
+        jsonify({"error": "Failed to filter data"})
+
+@app.route('/api/CrimeDataRaw', methods=['POST'])
+def get_CrimeRaw_filtered_data():
+    keyword = request.form['keyword']
+    filtered_df = Business_Layer.getCrimeDataRaw(keyword)
+    if filtered_df is not None:
+        crime_dict_list = [crime.__dict__ for crime in filtered_df]
+        return jsonify(crime_dict_list)
     else:
         jsonify({"error": "Failed to filter data"})
 

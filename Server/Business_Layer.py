@@ -5,11 +5,20 @@ def getSchoolData(keyword):
     rows = DataBase.fetchSchoolData(keyword)
     school_objects = []
     for row in rows:
-           school_obj = Entity.School(row[0], row[1], row[2], row[3], row[4], row[5])
+           school_obj = Entity.School(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12])
            school_objects.append(school_obj)
     return school_objects
 
 def getCrimeData(keyword):
+    rows = DataBase.fetchcrimeData(keyword)
+    total = DataBase.getSuburbTotalCrimeNumber(keyword)
+    crime_objects = []
+    for row in rows:
+           crime_obj = Entity.Crime(row[0], (row[1]/total[0][0])*100)
+           crime_objects.append(crime_obj)
+    return crime_objects
+
+def getCrimeDataRaw(keyword):
     rows = DataBase.fetchcrimeData(keyword)
     crime_objects = []
     for row in rows:
@@ -19,9 +28,10 @@ def getCrimeData(keyword):
 
 def getTotalCrime():
     rows = DataBase.getAllCrimeData()
+    total = DataBase.getTotalCrimeNumber()
     crime_objects = []
     for row in rows:
-        crime_obj = Entity.Crime(row[0], row[1])
+        crime_obj = Entity.Crime(row[0], (row[1]/total[0][0])*100)
         crime_objects.append(crime_obj)
     return crime_objects
 
@@ -45,3 +55,4 @@ def getPrediction(suburb,bedCount):
         prediction_objects.append(prediction_object)
         year = year + 1
     return  prediction_objects
+

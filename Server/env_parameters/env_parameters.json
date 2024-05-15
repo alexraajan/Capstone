@@ -1,0 +1,12 @@
+{
+  "environment": "dev",
+  "dev": {
+    "DbConnectionString": "DRIVER={ODBC Driver 17 for SQL Server};SERVER=ALEX_LENOVO\\SQLEXPRESS;DATABASE=RealEstate;Trusted_Connection=yes"
+  },
+  "qa": {
+    "DbConnectionString": ""
+  },
+  "prod": {
+    "DbConnectionString": ""
+  }
+}
